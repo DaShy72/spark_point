@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% block title %}Spark Point{% endblock title %}
+
+
+{% block content %}
+
+<!-- ======== HERO ======== -->
+  <section id="hero" class="hero container">
+    <div class="hero-left">
+      <p class="kicker">Добро пожаловать</p>
+      <h1>Создай свой сайт быстро и красиво</h1>
+      <p class="lead">Этот шаблон поможет тебе быстро начать проект. Он чистый, адаптивный и легко настраивается под любые нужды.</p>
+      <div class="mt-2">
+        <a href="#contact" class="btn">Начать</a>
+        <a href="#about" class="btn secondary">Узнать больше</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <img src="https://via.placeholder.com/420x280?text=Hero+Image" alt="Пример изображения">
+    </div>
+  </section>
+
+  <!-- ======== ABOUT / FEATURES ======== -->
+  <section id="about" class="container">
+    <h2>Почему выбрать нас</h2>
+    <p class="lead">Надёжный, современный и минималистичный шаблон, готовый к адаптации под любые проекты.</p>
+
+    <div class="grid cols-3 mt-2">
+      <div class="card">
+        <h3>Простота</h3>
+        <p>Код легко читать и редактировать — идеально для изучения и кастомизации.</p>
+      </div>
+      <div class="card">
+        <h3>Скорость</h3>
+        <p>Лёгкие стили без лишнего кода обеспечивают быструю загрузку сайта.</p>
+      </div>
+      <div class="card">
+        <h3>Адаптивность</h3>
+        <p>Сайт отлично выглядит на всех устройствах — от телефона до монитора.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== SERVICES ======== -->
+  <section id="services" class="container">
+    <h2>Наши услуги</h2>
+    <p class="lead">Мы помогаем создавать современные веб-приложения и сайты любой сложности.</p>
+
+    <div class="grid cols-3 mt-2">
+      <div class="card">
+        <h3>Разработка</h3>
+        <p>Создание сайтов и веб-приложений под ключ — от идеи до запуска.</p>
+      </div>
+      <div class="card">
+        <h3>Дизайн</h3>
+        <p>Современные макеты с упором на UX/UI и визуальную эстетику.</p>
+      </div>
+      <div class="card">
+        <h3>Поддержка</h3>
+        <p>Обновления, SEO и помощь после запуска проекта.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== CONTACT / FORM ======== -->
+  <section id="contact" class="container">
+    <h2>Свяжитесь с нами</h2>
+    <p class="lead">Оставьте заявку — мы ответим в ближайшее время.</p>
+
+    <form class="form mt-2">
+      <div class="form-row cols-2">
+        <div>
+          <label for="name">Имя</label>
+          <input id="name" type="text" class="input" placeholder="Ваше имя" required>
+        </div>
+        <div>
+          <label for="email">Email</label>
+          <input id="email" type="email" class="input" placeholder="example@mail.com" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <label for="message">Сообщение</label>
+        <textarea id="message" rows="4" class="input" placeholder="Ваше сообщение..."></textarea>
+      </div>
+      <button type="submit" class="btn mt-2">Отправить</button>
+    </form>
+  </section>
+
+  <!-- ======== FOOTER ======== -->
+  <footer class="footer">
+    <div class="container center">
+      <p>© 2025 Мой сайт. Все права защищены.</p>
+    </div>
+  </footer>
+
+{% endblock content %}
