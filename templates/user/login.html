@@ -1,10 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block title %}login in{% endblock title %}
+
+{% block content %}
+    <div class="sign-wrapper">
+        <div class="sign-container">
+            <h2>Login in</h2>
+
+            <form method="post" class="form" novalidate>
+                {% csrf_token %}
+                {% if form.non_field_errors %}
+                    <div>
+                        {{ form.non_field_errors }}
+                    </div>
+                {% endif %}
+
+                {% for field in form %}
+                    <div>
+
+                        {{ field }}
+                        {% if fields.errors %}
+                            <div>{{ field.errors|striptags }}</div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+                <button type="submit" class="sign-button">Login in</button>
+            </form>
+            <p>Нету аккаунта? <a href="{% url 'register' %}">Registrations</a></p>
+        </div>
+    </div>
+
+
+
+{% endblock content %}
