@@ -11,7 +11,7 @@ class CustomUserCreationForm(UserCreationForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.fields.values():
-            field.widget.attrs['class'] = field.label
+            field.widget.attrs['class'] = 'form-control'
             field.widget.attrs['placeholder'] = field.label
 
 
@@ -19,12 +19,10 @@ class CustomAuthenticationForm(AuthenticationForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.fields.values():
+            field.widget.attrs['class'] = 'form-control'
             field.widget.attrs['placeholder'] = field.label
-        self.fields['username'].widgets.attrs['class'] = 'username'
-        self.fields['password1'].widgets.attrs['class'] = 'password'
-        self.fields['password2'].widgets.attrs['class'] = 'password'
 
 class UserEditForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'lat_name', 'email')
+        fields = ('username', 'first_name', 'last_name', 'email')
