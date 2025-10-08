@@ -1,10 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block title %}login in{% endblock title %}
+
+{% block content %}
+
+<h2>Login in</h2>
+
+<form method="post" novalidate>
+    {% csrf_token %}
+    {% for field in form %}
+        <div>
+            <label for="{{field.id_for_label}}">{{ field.label }}</label>
+            {{ field }}
+            {% if fields.errors %}
+                <div>{{ field.errors|striptags }}</div>
+            {% endif %}
+        </div>
+    {% endfor %}
+    <button type="submit">Login in</button>
+</form>
+<p>Есть аккаунт? <a href="{% url 'login' %}">Login</a></p>
+
+{% endblock content %}
