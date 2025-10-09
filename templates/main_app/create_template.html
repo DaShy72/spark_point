@@ -1,0 +1,170 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Create{% endblock title %}
+
+{% block content %}
+
+<div class="create-wrapper">
+    <div class="create-container">
+        <h2>Create your page</h2>
+        <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+            <div class="form-row">
+                <label>First Name</label>
+                <input type="text" name="first_name" placeholder="_>...">
+            </div>
+
+            <div class="form-row">
+                <label>Last Name</label>
+                <input type="text" name="last_name" placeholder="_>...">
+            </div>
+
+            <div class="form-row">
+                <label>Type of activity</label>
+                <input type="text" name="type_of_activity" placeholder="_>...">
+            </div>
+
+            <div class="form-row">
+                <label>About you</label>
+                <input type="text" name="about" placeholder="_>...">
+            </div>
+
+            <h3>Your projects:</h3>
+            <div id="forms-container">
+                <div class="forms-container">
+                    <div class="form-row">
+                        <label>Description: </label>
+                        <input type="text" name="text" required>
+
+                        <label>File:</label>
+                        <input type="file" name="image" accept="image/*" required>
+
+                    </div>
+                    <div class="button-panel">
+                        <button class="btn-add" type="button" onclick="addForm()">Add one more</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="form-row">
+                <label>E-mail</label>
+                <input type="text" name="mail" placeholder="_>...">
+            </div>
+
+            <div class="form-row">
+                <label>Instagram <span class="not-necessary"> not necessary</span></label>
+                <input type="text" name="instagram" placeholder="_>...">
+            </div>
+
+            <div class="form-row">
+                <label>Telegram <span class="not-necessary"> not necessary</span></label>
+                <input type="text" name="telegram" placeholder="_>...">
+            </div>
+
+            <div class="form-row">
+                <label>Tik-Tok <span class="not-necessary"> not necessary</span></label>
+                <input type="text" name="tiktok" placeholder="_>...">
+            </div>
+
+            <div class="form-row">
+                <label>Facebook <span class="not-necessary"> not necessary</span></label>
+                <input type="text" name="facebook" placeholder="_>...">
+            </div>
+
+            <div class="form-row">
+                <label>Phone number <span class="not-necessary"> not necessary</span></label>
+                <input type="text" name="tel" placeholder="_>...">
+            </div>
+
+            <div class="form-row">
+                <label>Choose your template</label>
+                <div class="carousel">
+                    <button type="button" class="prev">&lt;</button>
+                    
+                    <div class="carousel-images">
+                        <img src="{% static 'img/img.png' %}" alt="image 1" data-value="1" class="active">
+                        <img src="{% static 'img/img_1.png' %}" alt="image 2" data-value="2">
+                        <img src="{% static 'img/img_2.png' %}" alt="image 3" data-value="3">
+                        <img src="{% static 'img/img_3.png' %}" alt="image 4" data-value="5">
+                    </div>
+                    <button type="button" class="next">&gt;</button>
+                </div>
+                <input type="hidden" name="selected_image" id="selected_image" value="1">
+            </div>
+
+            <button class="btn-send" type="submit">Send</button>
+        </form>
+
+    </div>
+</div>
+
+<script>
+    function addForm() {
+        const container = document.getElementById('forms-container');
+        const newForm = document.createElement('div');
+        newForm.classList.add('forms-container');
+
+        newForm.innerHTML = `
+            <div class="form-row">
+                <label>Description: </label>
+                <input type="text" name="text" required>
+
+                <label>File:</label>
+                <input type="file" name="image" accept="image/*" required>
+
+            </div>
+            <div class="button-panel">
+                <button class="btn-add" type="button" onclick="addForm()">Add one more</button>
+                <button type="button" class="remove-btn" onclick="removeForm(this)">Delete</button>
+            </div>
+        `;
+
+        container.appendChild(newForm);
+
+    }
+
+
+    function removeForm(button) {
+        const container = document.getElementById('forms-container');
+
+        const formWrapper = button.closest('#forms-container > div');
+        formWrapper.remove();
+    }
+
+    const images = document.querySelectorAll('.carousel-images img');
+    const prevBtn = document.querySelector('.prev');
+    const nextBtn = document.querySelector('.next');
+    const selectedInput = document.getElementById('selected_image');
+
+    let currentIndex = 0;
+
+    function showImage(index) {
+      images.forEach(img => img.classList.remove('active'));
+      images[index].classList.add('active');
+      selectedInput.value = images[index].dataset.value;
+    }
+
+    prevBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      showImage(currentIndex);
+    });
+
+    nextBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex + 1) % images.length;
+      showImage(currentIndex);
+    });
+
+    images.forEach((img, i) => {
+      img.addEventListener('click', () => {
+        currentIndex = i;
+        showImage(currentIndex);
+      });
+    });
+
+    showImage(currentIndex);
+</script>
+
+{% endblock content %}
