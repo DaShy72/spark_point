@@ -10,7 +10,7 @@ def index(request):
 def user_page(request, name):
     first_name, last_name = name.split('_')
     client_info = InfoForPage.objects.get(first_name=first_name, last_name=last_name)
-    client_projects = Projects.objects.get(user=client_info.user)
+    client_projects = Projects.objects.filter(user=client_info.user).all()
 
 
 
