@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>{{ first_name }} {{ last_name }}</title>
+    <style>
+        :root{
+            --bg: #f1724;
+            --card: #0b1220;
+            --muted: #94a3b8;
+            --accent: #6c5ce7;
+            --glass: rgba(255,255,255,0.04);
+            --maxw:1100px;
+        }
+        *{box-sizing: border-box}
+        body{
+            margin: 0;
+            font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+            background: linear-gradient(180deg, #061226 0%, #07142b 60%);
+            color:#e6eef6;
+            -webkit-font-smoothing:antialiased;
+            -moz-osx-font-smoothing:grayscale;
+        }
+
+        .wrap{
+            max-width:var(--maxw);
+            margin:40px auto;
+            padding:28px;
+            display:grid;
+            gap:24px;
+        }
+
+        .hero{
+            display:grid;
+            grid-template-columns: 260px 1fr;
+            gap:24px;
+            background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+            padding:22px;
+            border-radius:14px;
+            align-items:center;
+            box-shadow: 0 6px 30px rgba(0,0,0,0.45);
+            border: 1px solid rgba(255,255,255,0.02);
+        }
+
+        .avatar {
+            width:240px;
+            height:240px;
+            border-radius:12px;
+            overflow:hidden;
+            flex:0 0 240px;
+            background: linear-gradient(135deg,#1f2937,#111827);
+            display:flex;
+            align-items:center;
+            justify-content:center;
+        }
+
+        .avatar img{
+            width:100%;
+            height:100%;
+            object-fit:cover;
+            display:block;
+        }
+
+        .intro {
+            padding:6px 0;
+        }
+
+        .name{
+            font-size:28px;
+            font-weight:700;
+            margin:0 0 6px 0;
+            letter-spacing: -0.3px;
+        }
+
+        .role{
+            display:inline-block;
+            color:var(--accent);
+            background: linear-gradient(90deg, rgba(108,92,231,0.12), rgba(108,92,231,0.06));
+            padding:6px 10px;
+            border-radius:999px;
+            font-weight:600;
+            font-size:13px;
+            margin-bottom:12px;
+        }
+
+        .about{
+            color:var(--muted);
+            line-height:1.5;
+            margin-top:12px;
+            font-size:15px;
+        }
+
+        /* Info / contact */
+        .meta {
+            display:flex;
+            gap:12px;
+            margin-top:14px;
+            flex-wrap:wrap;
+        }
+        .meta .item{
+            background: var(--glass);
+            padding:10px 12px;
+            border-radius:10px;
+            color:var(--muted);
+            font-size:14px;
+            min-width:140px;
+        }
+
+        /* Projects */
+        .section {
+            background: linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));
+            padding:18px;
+            border-radius:12px;
+            border:1px solid rgba(255,255,255,0.02);
+        }
+        .section h3{
+            margin:0 0 14px 0;
+            font-size:20px;
+        }
+
+        .projects-grid{
+            display:grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap:14px;
+        }
+
+        .project {
+            background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+            border-radius:10px;
+            overflow:hidden;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+            transition: transform .22s ease, box-shadow .22s ease;
+            display:flex;
+            flex-direction:column;
+        }
+        .project:hover{
+            transform: translateY(-6px);
+            box-shadow: 0 18px 40px rgba(0,0,0,0.5);
+        }
+        .project .thumb{
+            width:100%;
+            height:140px;
+            background:#111;
+            display:block;
+        }
+        .project .thumb img{
+            width:100%;
+            height:100%;
+            object-fit:cover;
+            display:block;
+        }
+        .project .pbody{
+            padding:12px;
+            color:var(--muted);
+            font-size:14px;
+            flex:1;
+        }
+
+        /* Contact column */
+        .side {
+            display:flex;
+            flex-direction:column;
+            gap:12px;
+        }
+        .contact-card{
+            background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+            padding:14px;
+            border-radius:10px;
+            color:var(--muted);
+            font-size:15px;
+        }
+        .contact-list{ list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:8px;}
+        .contact-list a{ color:var(--accent); text-decoration:none; font-weight:600; }
+        .contact-list a:hover{ text-decoration:underline; }
+
+        /* Footer */
+        footer{
+            text-align:center;
+            color:var(--muted);
+            font-size:13px;
+            margin-top:6px;
+            opacity:0.9;
+        }
+
+        /* Responsive */
+        @media (max-width:900px){
+            .hero{ grid-template-columns: 1fr; text-align:center; }
+            .avatar{ margin:0 auto; width:200px; height:200px; }
+            .meta{ justify-content:center; }
+            .wrap{ padding:16px; }
+        }
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <!-- HERO -->
+    <header class="hero">
+      <div class="avatar" aria-hidden="true">
+        {% if client_info.user_picture %}
+          <img src="{{ client_info.user_picture.url }}" alt="{{ client_info.first_name }} {{ client_info.last_name }}">
+        {% endif %}
+      </div>
+
+      <div class="intro">
+        <h1 class="name">{{ client_info.first_name }} <span style="color:var(--muted)">{{ client_info.last_name }}</span></h1>
+        <div class="role">{{ client_info.type_of_activity }}</div>
+
+        <p class="about">{{ client_info.about }}</p>
+      </div>
+    </header>
+
+    <!-- MAIN CONTENT: Projects + Side -->
+    <div style="display:grid; grid-template-columns: 1fr 320px; gap:18px;">
+      <main>
+        <section class="section">
+          <h3>Projects</h3>
+
+          <div class="projects-grid">
+            {% if client_projects %}
+              {% for project in client_projects %}
+                <article class="project">
+                  <div class="thumb">
+                    <img src="{{ project.image_url.url }}" alt="project {{ forloop.counter }}">
+                  </div>
+                  <div class="pbody">
+                    <div>{{ project.text }}</div>
+                  </div>
+                </article>
+              {% endfor %}
+            {% endif %}
+          </div>
+        </section>
+      </main>
+
+      <aside class="side">
+        <div class="contact-card">
+          <h4 style="margin:0 0 8px 0">Contacts</h4>
+          <ul class="contact-list">
+            {% if client_info.tel %}<li>📞 <a href="tel:{{ client_info.tel }}">{{ client_info.tel }}</a></li>{% endif %}
+            {% if client_info.mail %}<li>✉️ <a href="mailto:{{ client_info.mail }}">{{ client_info.mail }}</a></li>{% endif %}
+            {% if client_info.instagram %}<li>📷 <a href="{{ client_info.instagram }}">{{ client_info.instagram }}</a></li>{% endif %}
+            {% if client_info.telegram %}<li>📷 <a href="{{ client_info.telegram }}">{{ client_info.telegram }}</a></li>{% endif %}
+            {% if client_info.facebook %}<li>📷 <a href="{{ client_info.facebook }}">{{ client_info.facebook }}</a></li>{% endif %}
+            {% if client_info.tiktok %}<li>📷 <a href="{{ client_info.tiktok }}">{{ client_info.tiktok }}</a></li>{% endif %}
+          </ul>
+        </div>
+
+        <div class="contact-card">
+          <h4 style="margin:0 0 8px 0">About</h4>
+          <p style="margin:0; color:var(--muted); line-height:1.5; font-size:14px;">{{ client_info.about|truncatechars:260 }}</p>
+        </div>
+
+        <div class="contact-card" style="text-align:center;">
+          <a href="#projects" style="display:inline-block; background:var(--accent); color:white; padding:10px 14px; border-radius:10px; text-decoration:none; font-weight:700;">Посмотреть проекты</a>
+        </div>
+      </aside>
+    </div>
+
+    <footer>
+      © {{ client_info.first_name }} {{ client_info.last_name }} — {{ client_info.type_of_activity }} · {{ now|date:"Y" }}
+    </footer>
+</div>
+</body>
+</html>
