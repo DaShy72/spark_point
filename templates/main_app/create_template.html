@@ -21,6 +21,11 @@
                 <input type="text" name="last_name" placeholder="_>...">
             </div>
 
+            <div class="forms-container">
+                <label>Your foto:</label>
+                <input type="file" name="user_picture" accept="image/*" required>
+            </div>
+
             <div class="form-row">
                 <label>Type of activity</label>
                 <input type="text" name="type_of_activity" placeholder="_>...">
@@ -46,7 +51,6 @@
                         <button class="btn-add" type="button" onclick="addForm()">Add one more</button>
                     </div>
                 </div>
-
             </div>
 
             <div class="form-row">
@@ -92,7 +96,7 @@
                     </div>
                     <button type="button" class="next">&gt;</button>
                 </div>
-                <input type="hidden" name="selected_image" id="selected_image" value="1">
+                <input type="hidden" name="template_name" id="selected_image" value="1">
             </div>
 
             <button class="btn-send" type="submit">Send</button>
