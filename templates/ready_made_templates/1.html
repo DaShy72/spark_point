@@ -239,20 +239,11 @@
           <ul class="contact-list">
             {% if client_info.tel %}<li>📞 <a href="tel:{{ client_info.tel }}">{{ client_info.tel }}</a></li>{% endif %}
             {% if client_info.mail %}<li>✉️ <a href="mailto:{{ client_info.mail }}">{{ client_info.mail }}</a></li>{% endif %}
-            {% if client_info.instagram %}<li>📷 <a href="{{ client_info.instagram }}">{{ client_info.instagram }}</a></li>{% endif %}
-            {% if client_info.telegram %}<li>📷 <a href="{{ client_info.telegram }}">{{ client_info.telegram }}</a></li>{% endif %}
-            {% if client_info.facebook %}<li>📷 <a href="{{ client_info.facebook }}">{{ client_info.facebook }}</a></li>{% endif %}
-            {% if client_info.tiktok %}<li>📷 <a href="{{ client_info.tiktok }}">{{ client_info.tiktok }}</a></li>{% endif %}
+            {% if client_info.instagram %}<li>📸 <a href="{{ client_info.instagram }}">{{ client_info.instagram }}</a></li>{% endif %}
+            {% if client_info.telegram %}<li>✈️ <a href="{{ client_info.telegram }}">{{ client_info.telegram }}</a></li>{% endif %}
+            {% if client_info.facebook %}<li>📘 <a href="{{ client_info.facebook }}">{{ client_info.facebook }}</a></li>{% endif %}
+            {% if client_info.tiktok %}<li>🎵 <a href="{{ client_info.tiktok }}">{{ client_info.tiktok }}</a></li>{% endif %}
           </ul>
-        </div>
-
-        <div class="contact-card">
-          <h4 style="margin:0 0 8px 0">About</h4>
-          <p style="margin:0; color:var(--muted); line-height:1.5; font-size:14px;">{{ client_info.about|truncatechars:260 }}</p>
-        </div>
-
-        <div class="contact-card" style="text-align:center;">
-          <a href="#projects" style="display:inline-block; background:var(--accent); color:white; padding:10px 14px; border-radius:10px; text-decoration:none; font-weight:700;">Посмотреть проекты</a>
         </div>
       </aside>
     </div>
