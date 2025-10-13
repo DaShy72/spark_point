@@ -1,77 +1,88 @@
 {% extends 'base.html' %}
 {% block title %}Spark Point{% endblock title %}
-
+{% load static %}
 
 {% block content %}
 
 <!-- ======== HERO ======== -->
   <section id="hero" class="hero container">
     <div class="hero-left">
-      <p class="kicker">Добро пожаловать</p>
-      <h1>Создай свой сайт быстро и красиво</h1>
-      <p class="lead">Этот шаблон поможет тебе быстро начать проект. Он чистый, адаптивный и легко настраивается под любые нужды.</p>
+      <p class="kicker">Welcome</p>
+      <h1>Create your website quickly and beautifully</h1>
+      <p class="lead">This service will help you quickly create your own website. Just fill in the details, choose a template, and your site is ready.</p>
       <div class="mt-2">
-        <a href="#contact" class="btn">Начать</a>
-        <a href="#about" class="btn secondary">Узнать больше</a>
+        <a href="{% url 'cabinet' %}" class="btn">Start</a>
+        <a href="#about" class="btn secondary">Find out more</a>
       </div>
     </div>
-    <div class="hero-right">
-      <img src="https://via.placeholder.com/420x280?text=Hero+Image" alt="Пример изображения">
+    <div class="form-row">
+      <label>Choose your template</label>
+      <div class="carousel">
+          <button type="button" class="prev">&lt;</button>
+
+          <div class="carousel-images">
+              <img src="{% static 'img/sql.png' %}" class="active">
+              <img src="{% static 'img/todo.png' %}">
+              <img src="{% static 'img/vocab.png' %}">
+              <img src="{% static 'img/todo.png' %}">
+          </div>
+          <button type="button" class="next">&gt;</button>
+      </div>
     </div>
   </section>
 
   <!-- ======== ABOUT / FEATURES ======== -->
   <section id="about" class="container">
-    <h2>Почему выбрать нас</h2>
-    <p class="lead">Надёжный, современный и минималистичный шаблон, готовый к адаптации под любые проекты.</p>
+    <h2>Why choose us</h2>
+    <p class="lead">A reliable, modern, and minimalist template, ready to adapt to any project.</p>
 
     <div class="grid cols-3 mt-2">
       <div class="card">
-        <h3>Простота</h3>
-        <p>Код легко читать и редактировать — идеально для изучения и кастомизации.</p>
+        <h3>Simplicity</h3>
+        <p>The code is easy to read and edit, making it ideal for learning and customization.</p>
       </div>
       <div class="card">
-        <h3>Скорость</h3>
-        <p>Лёгкие стили без лишнего кода обеспечивают быструю загрузку сайта.</p>
+        <h3>Speed</h3>
+        <p>Lightweight styles without unnecessary code ensure fast website loading.</p>
       </div>
       <div class="card">
-        <h3>Адаптивность</h3>
-        <p>Сайт отлично выглядит на всех устройствах — от телефона до монитора.</p>
+        <h3>Adaptability</h3>
+        <p>The site looks great on all devices, from phones to monitors.</p>
       </div>
     </div>
   </section>
 
   <!-- ======== SERVICES ======== -->
   <section id="services" class="container">
-    <h2>Наши услуги</h2>
-    <p class="lead">Мы помогаем создавать современные веб-приложения и сайты любой сложности.</p>
+    <h2>Our services</h2>
+    <p class="lead">We help create modern web applications and websites of any complexity.</p>
 
     <div class="grid cols-3 mt-2">
       <div class="card">
-        <h3>Разработка</h3>
-        <p>Создание сайтов и веб-приложений под ключ — от идеи до запуска.</p>
+        <h3>Development</h3>
+        <p>Turnkey website and web application development – from concept to launch.</p>
       </div>
       <div class="card">
-        <h3>Дизайн</h3>
-        <p>Современные макеты с упором на UX/UI и визуальную эстетику.</p>
+        <h3>Design</h3>
+        <p>Modern mockups with a focus on UX/UI and visual aesthetics.</p>
       </div>
       <div class="card">
-        <h3>Поддержка</h3>
-        <p>Обновления, SEO и помощь после запуска проекта.</p>
+        <h3>Support</h3>
+        <p>Updates, SEO, and post-launch assistance.</p>
       </div>
     </div>
   </section>
 
   <!-- ======== CONTACT / FORM ======== -->
   <section id="contact" class="container">
-    <h2>Свяжитесь с нами</h2>
-    <p class="lead">Оставьте заявку — мы ответим в ближайшее время.</p>
+    <h2>Contact us</h2>
+    <p class="lead">Leave a request and we will respond shortly.</p>
 
     <form class="form mt-2">
       <div class="form-row cols-2">
         <div>
-          <label for="name">Имя</label>
-          <input id="name" type="text" class="input" placeholder="Ваше имя" required>
+          <label for="name">Name</label>
+          <input id="name" type="text" class="input" placeholder="Your name" required>
         </div>
         <div>
           <label for="email">Email</label>
@@ -79,18 +90,54 @@
         </div>
       </div>
       <div class="form-row">
-        <label for="message">Сообщение</label>
-        <textarea id="message" rows="4" class="input" placeholder="Ваше сообщение..."></textarea>
+        <label for="message">Message</label>
+        <textarea id="message" rows="4" class="input" placeholder="Your message..."></textarea>
       </div>
-      <button type="submit" class="btn mt-2">Отправить</button>
+      <button type="submit" class="btn mt-2">Send</button>
     </form>
   </section>
 
   <!-- ======== FOOTER ======== -->
   <footer class="footer">
     <div class="container center">
-      <p>© 2025 Мой сайт. Все права защищены.</p>
+      <p>© 2025 Spark Point. All rights reserved.</p>
     </div>
   </footer>
+
+
+<script>
+  const images = document.querySelectorAll('.carousel-images img');
+    const prevBtn = document.querySelector('.prev');
+    const nextBtn = document.querySelector('.next');
+    const selectedInput = document.getElementById('selected_image');
+
+    let currentIndex = 0;
+
+    function showImage(index) {
+      images.forEach(img => img.classList.remove('active'));
+      images[index].classList.add('active');
+      selectedInput.value = images[index].dataset.value;
+    }
+
+    prevBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      showImage(currentIndex);
+    });
+
+    nextBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex + 1) % images.length;
+      showImage(currentIndex);
+    });
+
+    images.forEach((img, i) => {
+      img.addEventListener('click', () => {
+        currentIndex = i;
+        showImage(currentIndex);
+      });
+    });
+
+    showImage(currentIndex);
+</script>
+
 
 {% endblock content %}
