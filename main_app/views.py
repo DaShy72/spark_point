@@ -1,18 +1,17 @@
 from django.shortcuts import render
 from .models import InfoForPage, Projects
+from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
 
 def index(request):
     return render(request, 'main_app/index.html')
 
-
+@login_required
 def user_page(request, name):
     first_name, last_name = name.split('_')
     client_info = InfoForPage.objects.get(first_name=first_name, last_name=last_name)
     client_projects = Projects.objects.filter(user=client_info.user).all()
-
-
 
     return render(request, f'ready_made_templates/{client_info.template_name}.html', context={'client_info': client_info,
                                                                                   'client_projects': client_projects})
@@ -57,3 +56,20 @@ def create_page(request):
             Projects.objects.create(user=request.user, text=text, image_url=image_url)
 
     return render(request, 'main_app/create_template.html')
+
+@login_required
+def cabinet(request):
+    user = request.user
+
+    client_info = InfoForPage.objects.get(user=user)
+    client_projects = Projects.objects.filter(user=user).all()
+    url_page = f'{client_info.first_name}_{client_info.last_name}'
+
+    context = {
+        'user': user,
+        'client_info': client_info,
+        'client_projects': client_projects,
+        'url_page': url_page
+    }
+
+    return render(request, 'main_app/cabinet.html', context)
