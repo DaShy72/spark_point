@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ client_info.first_name }} {{ client_info.last_name }}</title>
+  <style>
+    :root {
+      --bg: #f0f2f5;
+      --primary: #1e3a8a;
+      --text-dark: #1e293b;
+      --text-light: #64748b;
+      --white: #ffffff;
+      --shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    * {
+      box-sizing: border-box;
+      transition: all 0.3s ease;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      font-family: 'Inter', sans-serif;
+      color: var(--text-dark);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .profile-card {
+      display: flex;
+      flex-wrap: wrap;
+      background: var(--white);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      max-width: 1000px;
+      overflow: hidden;
+      margin: 2rem;
+    }
+
+    .profile-image {
+      flex: 1 1 350px;
+      background: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .profile-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.9;
+    }
+
+    .profile-info {
+      flex: 1 1 400px;
+      padding: 3rem 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .profile-info h1 {
+      font-size: 2.2rem;
+      margin: 0;
+      color: var(--primary);
+    }
+
+    .profile-info h2 {
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--text-light);
+      margin-top: 0.5rem;
+    }
+
+    .profile-info p {
+      margin: 1.5rem 0;
+      line-height: 1.7;
+      color: var(--text-dark);
+      font-size: 1rem;
+    }
+
+    .contact-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-bottom: 2rem;
+    }
+
+    .contact-item {
+      background: var(--primary);
+      color: white;
+      padding: 0.6rem 1rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      text-decoration: none;
+      box-shadow: 0 2px 8px rgba(30, 58, 138, 0.3);
+    }
+
+    .projects-section {
+      margin-top: 2rem;
+    }
+
+    .projects-section h3 {
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+      color: var(--primary);
+    }
+
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+    }
+
+    .project-card {
+      background: #f8fafc;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    }
+
+    .project-card img {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+    }
+
+    .project-card p {
+      padding: 0.8rem 1rem;
+      color: var(--text-light);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      .profile-card {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .profile-info {
+        padding: 2rem 1.5rem;
+      }
+
+      .projects {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .projects {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="profile-card">
+    <div class="profile-image">
+      <img src="{{ client_info.user_picture.url }}" alt="{{ client_info.first_name }} {{ client_info.last_name }}">
+    </div>
+
+    <div class="profile-info">
+      <h1>{{ client_info.first_name }} {{ client_info.last_name }}</h1>
+      <h2>{{ client_info.type_of_activity }}</h2>
+      <p>{{ client_info.about }}</p>
+
+      <div class="contact-list">
+        {% if client_info.tel %}<span class="contact-item">📞{{ client_info.tel }}</span>{% endif %}
+        {% if client_info.mail %}<span class="contact-item">✉️{{ client_info.mail }}</span>{% endif %}
+        {% if client_info.instagram %}<span class="contact-item">📸{{ client_info.instagram }}</span>{% endif %}
+        {% if client_info.telegram %}<span class="contact-item">✈️{{ client_info.telegram }}</span>{% endif %}
+        {% if client_info.facebook %}<span class="contact-item">📘{{ client_info.facebook }}</span>{% endif %}
+        {% if client_info.tiktok %}<span class="contact-item">🎵{{ client_info.tiktok }}</span>{% endif %}
+      </div>
+
+      <div class="projects-section">
+        <h3>Projects</h3>
+        <div class="projects">
+          {% for project in client_projects %}
+            <div class="project-card">
+              <img src="{{ project.image_url.url }}" alt="Project image">
+              <p>{{ project.text }}</p>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
