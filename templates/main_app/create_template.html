@@ -89,10 +89,11 @@
                     <button type="button" class="prev">&lt;</button>
                     
                     <div class="carousel-images">
-                        <img src="{% static 'img/img.png' %}" alt="image 1" data-value="1" class="active">
-                        <img src="{% static 'img/img_1.png' %}" alt="image 2" data-value="2">
-                        <img src="{% static 'img/img_2.png' %}" alt="image 3" data-value="3">
-                        <img src="{% static 'img/img_3.png' %}" alt="image 4" data-value="5">
+                        <a href="{% url 'bill_gates' %}"><img src="{% static 'img/1.png' %}" alt="image 1" data-value="1" class="active"></a>
+                        <a href="{% url 'curtis_james_jackson' %}"><img src="{% static 'img/2.png' %}" alt="image 2" data-value="2"></a>
+                        <a href="{% url 'leonardo_dicaprio' %}"><img src="{% static 'img/3.png' %}" alt="image 3" data-value="3"></a>
+                        <a href="{% url 'homer_jay_simpson' %}"><img src="{% static 'img/4.png' %}" alt="image 4" data-value="4"></a>
+                        <a href="{% url 'matthew_david_mcconaughey' %}"><img src="{% static 'img/5.png' %}" alt="image 5" data-value="5"></a>
                     </div>
                     <button type="button" class="next">&gt;</button>
                 </div>
