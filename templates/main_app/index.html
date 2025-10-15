@@ -21,10 +21,12 @@
           <button type="button" class="prev">&lt;</button>
 
           <div class="carousel-images">
-              <img src="{% static 'img/sql.png' %}" class="active">
-              <img src="{% static 'img/todo.png' %}">
-              <img src="{% static 'img/vocab.png' %}">
-              <img src="{% static 'img/todo.png' %}">
+              <a href="{% url 'bill_gates' %}"><img src="{% static 'img/1.png' %}" class="active"></a>
+              <a href="{% url 'curtis_james_jackson' %}"><img src="{% static 'img/2.png' %}"></a>
+              <a href="{% url 'leonardo_dicaprio' %}"><img src="{% static 'img/3.png' %}"></a>
+              <a href="{% url 'homer_jay_simpson' %}"><img src="{% static 'img/4.png' %}"></a>
+              <a href="{% url 'matthew_david_mcconaughey' %}"><img src="{% static 'img/5.png' %}"></a>
+
           </div>
           <button type="button" class="next">&gt;</button>
       </div>
