@@ -9,7 +9,7 @@ def register_view(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('index')
+            return redirect('login')
     else:
         form = CustomUserCreationForm
     return render(request, 'user/register.html', {'form': form})
