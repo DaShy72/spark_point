@@ -532,14 +532,14 @@ button.next {
 
 .preview-section {
     flex: 1 1 60%;
-    background: #ffffff;
+    background: #334155;
     border-radius: 12px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     padding: 1rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 400px;
+    min-height: 550px;
 }
 
 .preview-frame {
@@ -571,7 +571,7 @@ button.next {
 }
 
 .user-card {
-    background: #ffffff;
+    background: #334155;
     border-radius: 12px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     padding: 2rem;
@@ -583,9 +583,13 @@ button.next {
     align-items: center;
 }
 
+.user-card h2 {
+    color: white
+}
+
 .user-photo {
-    width: 180px;
-    height: 180px;
+    width: 250px;
+    height: 250px;
     border-radius: 50%;
     object-fit: cover;
     margin-bottom: 1rem;
