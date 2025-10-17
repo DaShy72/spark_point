@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import InfoForPage, Projects
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
@@ -14,15 +14,20 @@ def user_page(request, name):
     first_name, last_name = result.split('_')
     client_info = InfoForPage.objects.get(first_name=first_name, last_name=last_name)
     client_projects = Projects.objects.filter(user=client_info.user).all()
-    return render(request, f'ready_made_templates/3.html', context={'client_info': client_info,
+    return render(request, f'ready_made_templates/{client_info.template_name}.html', context={'client_info': client_info,
                                                                                   'client_projects': client_projects})
 
 @login_required
 def create_page(request):
 
+    try:
+        info = InfoForPage.objects.get(user=request.user)
+    except InfoForPage.DoesNotExist:
+        info = None
+
     if request.method == 'POST':
-        user_picture = request.FILES.get('user_picture').strip()
-        first_name = request.POST.get('first_name').strip()
+        user_picture = request.FILES.get('user_picture')
+        first_name = request.POST.get('first_name')
         last_name = request.POST.get('last_name')
         type_of_activity = request.POST.get('type_of_activity')
         about = request.POST.get('about')
@@ -37,34 +42,61 @@ def create_page(request):
         texts = request.POST.getlist('text')
         image_urls = request.FILES.getlist('image')
 
+        if info is None:
+            InfoForPage.objects.create(user=request.user,
+                                       user_picture=user_picture,
+                                       first_name=first_name,
+                                       last_name=last_name,
+                                       type_of_activity=type_of_activity,
+                                       about=about,
+                                       mail=mail,
+                                       instagram=instagram,
+                                       telegram=telegram,
+                                       tiktok=tiktok,
+                                       facebook=facebook,
+                                       tel=tel,
+                                       template_name=template_name)
 
+            for text, image_url in zip(texts, image_urls):
+                Projects.objects.create(user=request.user, text=text, image_url=image_url)
+        else:
+            Projects.objects.filter(user=request.user).delete()
+            InfoForPage.objects.filter(user=request.user).delete()
 
-        InfoForPage.objects.create(user=request.user,
-                                   user_picture=user_picture,
-                                   first_name=first_name,
-                                   last_name=last_name,
-                                   type_of_activity=type_of_activity,
-                                   about=about,
-                                   mail=mail,
-                                   instagram=instagram,
-                                   telegram=telegram,
-                                   tiktok=tiktok,
-                                   facebook=facebook,
-                                   tel=tel,
-                                   template_name=template_name)
+            InfoForPage.objects.create(user=request.user,
+                                       user_picture=user_picture,
+                                       first_name=first_name,
+                                       last_name=last_name,
+                                       type_of_activity=type_of_activity,
+                                       about=about,
+                                       mail=mail,
+                                       instagram=instagram,
+                                       telegram=telegram,
+                                       tiktok=tiktok,
+                                       facebook=facebook,
+                                       tel=tel,
+                                       template_name=template_name)
 
-        for text, image_url in zip(texts, image_urls):
-            Projects.objects.create(user=request.user, text=text, image_url=image_url)
+            for text, image_url in zip(texts, image_urls):
+                Projects.objects.create(user=request.user, text=text, image_url=image_url)
+        return redirect('cabinet')
 
     return render(request, 'main_app/create_template.html')
 
 @login_required
 def cabinet(request):
     user = request.user
+    try:
+        client_info = InfoForPage.objects.get(user=user)
+        url_page = f'{client_info.first_name}_{client_info.last_name}'
+    except InfoForPage.DoesNotExist:
+        client_info = None
+        url_page = None
 
-    client_info = InfoForPage.objects.get(user=user)
-    client_projects = Projects.objects.filter(user=user).all()
-    url_page = f'{client_info.first_name}_{client_info.last_name}'
+    try:
+        client_projects = Projects.objects.filter(user=user).all()
+    except Projects.DoesNotExists:
+        client_projects = None
 
     context = {
         'user': user,
