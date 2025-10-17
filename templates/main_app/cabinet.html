@@ -7,17 +7,15 @@
 {% block content %}
 
 
-
-
-
-
 <div class="cabinet-wrapper">
     <div class="cabinet-container">
         <div class="preview-section">
             {% if url_page %}
                 <iframe src="{% url 'user_page' url_page  %}" class="preview-frame"></iframe>
             {% else %}
-                <button class="create-template-btn">+ Create your first template</button>
+                <a href="{% url 'create' %}">
+                    <button class="create-template-btn">+ Create your first template</button>
+                </a>
             {% endif %}    
         </div>
         
@@ -26,12 +24,13 @@
                 <img src="{% static 'img/user.png' %}" class="user-photo" alt="USER">
                 <h2>{{ user.username }}</h2>
                 <div class="buttons">
-                    {% if user_page %}
-                        <a href="{% url 'index' %}" class="btn">Edit your page</a>
+                    {% if client_info %}
+                        <a href="{% url 'user_page' url_page %}" class="btn">See your page</a>
+                        <a href="{% url 'create' %}" class="btn">Edit page</a>
                     {% endif %}
-                    <a href="{% url 'user_page' url_page %}" class="btn">See your page</a>
                     <a href="{% url 'index' %}" class="btn">Edit profile</a>
                     <a href="{% url 'index' %}" class="btn btn-logout">Logout</a>
+
                 </div>
             </div>
         </div>
